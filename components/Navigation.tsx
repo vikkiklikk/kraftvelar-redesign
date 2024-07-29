@@ -11,17 +11,252 @@ const links = [
     name: "Sölutorg",
     src: "#",
     submenu: [
-      "Notuð tæki",
-      "Ný tæki á lager",
-      "Gjafavörur",
-      "Rýmingarvara varahlutir",
+      {
+        subname: "Notuð tæki",
+        src: "#",
+        subsubmenu: [
+          {
+            subsubname: "Notuð landbúnaðartæki",
+            src: "#",
+          },
+          {
+            subsubname: "Notaðir lyftarar",
+            src: "#",
+          },
+          {
+            subsubname: "Notaðar vinnuvélar",
+            src: "#",
+          },
+          {
+            subsubname: "Notaðir aukahlutir",
+            src: "#",
+          },
+        ],
+      },
+      {
+        subname: "Ný tæki á lager",
+        src: "#",
+        subsubmenu: [
+          {
+            subsubname: "Ný landbúnaðartæki",
+            src: "#",
+          },
+          {
+            subsubname: "Nýjir lyftarar á lager",
+            src: "#",
+          },
+          {
+            subsubname: "Nýjar vinnuvélar á lager",
+            src: "#",
+          },
+          {
+            subsubname: "Nýjir aukahlutir á lager",
+            src: "#",
+          },
+        ],
+      },
+      {
+        subname: "Notuð tæki",
+        src: "#",
+      },
+      {
+        subname: "Gjafavörur",
+        src: "#",
+      },
     ],
   },
-  { name: "Vöruúrval", src: "#" },
-  { name: "Kraftvélaleigan", src: "#" },
-  { name: "Varahlutaverslun", src: "#" },
-  { name: "Verkstæði", src: "#" },
-  { name: "Um Kraftvélar", src: "#" },
+  {
+    name: "Vöruúrval",
+    src: "#",
+    submenu: [
+      {
+        subname: "Notuð tæki",
+        src: "#",
+      },
+      {
+        subname: "Ný tæki á lager",
+        src: "#",
+      },
+      {
+        subname: "Notuð tæki",
+        src: "#",
+      },
+      {
+        subname: "Ný tæki á lager",
+        src: "#",
+      },
+      {
+        subname: "Landbúnaðartæki",
+        src: "#",
+        subsubmenu: [
+          {
+            subsubname: "Case IH",
+            src: "#",
+          },
+          {
+            subsubname: "New Holland",
+            src: "#",
+          },
+          {
+            subsubname: "Pöttinger",
+            src: "#",
+          },
+          {
+            subsubname: "Weidemann",
+            src: "#",
+          },
+          {
+            subsubname: "Alö Quicke ámoksturstæki",
+            src: "#",
+          },
+          {
+            subsubname: "Abbey haugsugur",
+            src: "#",
+          },
+          {
+            subsubname: "Kongskilde",
+            src: "#",
+          },
+          {
+            subsubname: "Zuidberg",
+            src: "#",
+          },
+        ],
+      },
+      {
+        subname: "Vinnuvélar",
+        src: "#",
+        subsubmenu: [
+          {
+            subsubname: "Komatsu vinnuvélar",
+            src: "#",
+          },
+          {
+            subsubname: "Sandvik",
+            src: "#",
+          },
+          {
+            subsubname: "Dynapac",
+            src: "#",
+          },
+          {
+            subsubname: "Rammer vökvafleygar",
+            src: "#",
+          },
+          {
+            subsubname: "Miller hraðtengi og skóflur",
+            src: "#",
+          },
+          {
+            subsubname: "OSA vökvafleygar",
+            src: "#",
+          },
+        ],
+      },
+      {
+        subname: "Lyftarar",
+        src: "#",
+        subsubmenu: [
+          {
+            subsubname: "Toyota lyftarar",
+            src: "#",
+          },
+          {
+            subsubname: "Kalmar lyftarar og dráttarbílar",
+            src: "#",
+          },
+          {
+            subsubname: "Weidemann skotbómulyftarar",
+            src: "#",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: "Kraftvélaleigan",
+    src: "#",
+    submenu: [
+      {
+        subname: "Um Kraftvélaleiguna",
+        src: "#",
+      },
+      {
+        subname: "Leigja tæki",
+        src: "#",
+      },
+    ],
+  },
+  {
+    name: "Varahlutaverslun",
+    src: "#",
+    submenu: [
+      {
+        subname: "Umboð Kraftvéla",
+        src: "#",
+      },
+    ],
+  },
+  {
+    name: "Verkstæði",
+    src: "#",
+    submenu: [
+      {
+        subname: "Um verkstæðið",
+        src: "#",
+      },
+      {
+        subname: "Viðurkenndir þjónustuaðilar",
+        src: "#",
+      },
+      {
+        subname: "Smurbíll",
+        src: "#",
+      },
+      {
+        subname: "KOMATSU Care",
+        src: "#",
+      },
+    ],
+  },
+  {
+    name: "Um Kraftvélar",
+    src: "#",
+    submenu: [
+      {
+        subname: "Saga Kraftvéla",
+        src: "#",
+      },
+      {
+        subname: "Staðsetning og opnunartími",
+        src: "#",
+      },
+      {
+        subname: "Starfsmenn og skipurit",
+        src: "#",
+      },
+      {
+        subname: "Merki félagsins",
+        src: "#",
+      },
+      {
+        subname: "Persónuverndarstefna",
+        src: "#",
+      },
+      {
+        subname: "Skrá mig á póstlista",
+        src: "#",
+      },
+      {
+        subname: "Umsókn um reikningsviðskipti",
+        src: "#",
+      },
+      {
+        subname: "Sækja um starf",
+        src: "#",
+      },
+    ],
+  },
 ];
 
 const Navigation = () => {
