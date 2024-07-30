@@ -4,7 +4,7 @@ import Image from "next/image";
 import kraftvelarlogo from "../public/images/kraftvelarlogo-vortex.png";
 import React, { useState } from "react";
 import Link from "next/link";
-import { SlArrowUp } from "react-icons/sl";
+import { SlArrowUp, SlClock } from "react-icons/sl";
 
 const links = [
   {
@@ -261,6 +261,7 @@ const links = [
 
 const Navigation = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [subHoveredIndex, setSubHoveredIndex] = useState<number | null>(null);
 
   const handleMouseEnter = (index: number) => {
     setHoveredIndex(index);
@@ -268,46 +269,101 @@ const Navigation = () => {
 
   const handleMouseLeave = () => {
     setHoveredIndex(null);
+    setSubHoveredIndex(null);
+  };
+
+  const handleSubMouseEnter = (index: number) => {
+    setSubHoveredIndex(index);
+  };
+
+  const handleSubMouseLeave = () => {
+    setSubHoveredIndex(null);
   };
 
   return (
-    <nav className="mt-6 flex flex-row justify-between">
-      <div className="flex flex-row items-center justify-between w-full relative">
+    <nav className="mt-6 flex flex-row justify-between bg-white bg-opacity-40 p-6 rounded-xl backdrop-blur-xl drop-shadow-md relative backdrop-brightness-105">
+      <div
+        className="flex flex-row items-center justify-between w-full relative"
+        onMouseLeave={handleMouseLeave}
+      >
         <Link href="/">
           <Image
             src={kraftvelarlogo}
             priority={true}
             alt="logo"
-            width={250}
+            width={200}
             height={100}
-          ></Image>
+            className="drop-shadow-[0_5px_3px_rgba(48,48,48,0.35)] hover:drop-shadow-[0_1px_3px_rgba(255,255,255,0.45)] transition-all duration-150 ease-in-out"
+          />
         </Link>
-        <ul className="flex flex-row gap-4">
+        <ul className="flex flex-row gap-5">
           {links.map((link, index) => (
-            <li key={index}>
+            <li
+              key={index}
+              className="relative"
+              onMouseEnter={() => handleMouseEnter(index)}
+            >
               <Link
-                className="text-md font-bold opacity-70 hover:text-[#797B7F] hover:duration-300 hover:ease-in-out"
+                className="text-sm font-bold opacity-70 hover:text-[#797B7F] hover:duration-100 hover:ease-in"
                 href={link.src}
-                onMouseEnter={() => {
-                  handleMouseEnter(index);
-                }}
-                onMouseLeave={handleMouseLeave}
               >
-                <div className="flex flex-row items-center gap-2 relative">
+                <div className="flex flex-row items-center gap-1 relative">
                   {link.name}{" "}
-                  <SlArrowUp
-                    size={10}
-                    className={`transition-transform duration-200 ${
-                      hoveredIndex === index ? "rotate-180" : ""
-                    }`}
-                  />
+                  {link.submenu && (
+                    <SlArrowUp
+                      size={10}
+                      className={`transition-transform duration-300 ease-in-out ${
+                        hoveredIndex === index ? "rotate-180" : ""
+                      }`}
+                    />
+                  )}
                 </div>
               </Link>
+              {hoveredIndex === index && link.submenu && (
+                <ul className=" flex flex-col absolute left-0 top-full mt-2 p-2 shadow-lg rounded-md bg-white backdrop-blur-3xl bg-opacity-80">
+                  {link.submenu.map((sublink, subindex) => (
+                    <li
+                      key={subindex}
+                      className="relative w-44"
+                      onMouseEnter={() => handleSubMouseEnter(subindex)}
+                    >
+                      <Link
+                        className="flex flex-row items-center px-4 py-2 gap-1 hover:bg-gray-200 hover:bg-opacity-50 hover:rounded-md text-sm"
+                        href={sublink.src}
+                      >
+                        {sublink.subname}
+                        {sublink.subsubmenu && (
+                          <SlArrowUp
+                            size={10}
+                            className={`ml-2 transition-transform duration-300 ease-in-out ${
+                              subHoveredIndex === subindex ? "rotate-90" : ""
+                            }`}
+                          />
+                        )}
+                      </Link>
+                      {subHoveredIndex === subindex && sublink.subsubmenu && (
+                        <ul className="absolute left-full top-0 mt-2 p-2 rounded-md shadow-lg bg-white">
+                          {sublink.subsubmenu.map((subsublink, subsuindex) => (
+                            <li key={subsuindex}>
+                              <Link
+                                className="w-44 block px-4 py-2 text-sm hover:bg-gray-200 hover:bg-opacity-50 hover:rounded-md"
+                                href={subsublink.src}
+                              >
+                                {subsublink.subsubname}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           ))}
         </ul>
-        <span className="bg-[#FDC917] p-2 rounded-xl cursor-pointer drop-shadow-md hover:drop-shadow-none text-sm text-black opacity-70 font-bold hover:opacity-100 duration-200 ease-in-out">
-          <p>Hafa Samband</p>
+        <span className="bg-[#FDC917] p-2 rounded-md cursor-pointer text-sm text-black hover:opacity-60 opacity-85 font-bold duration-200 ease-in-out">
+          <p>Hafa samband</p>
         </span>
       </div>
     </nav>
