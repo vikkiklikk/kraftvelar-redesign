@@ -4,8 +4,9 @@ import Image from "next/image";
 import kraftvelarlogo from "../public/images/kraftvelarlogo-vortex.png";
 import React, { useState } from "react";
 import Link from "next/link";
-import { SlArrowUp, SlClock } from "react-icons/sl";
+import { SlArrowUp } from "react-icons/sl";
 
+// Bit long - could be refactored into more arrays but the hierarchy is more visible - maybe better placed in a seperate file
 const links = [
   {
     name: "Sölutorg",
@@ -282,6 +283,8 @@ const Navigation = () => {
 
   return (
     <nav className="mt-6 flex flex-row justify-between bg-white bg-opacity-40 p-6 rounded-xl backdrop-blur-xl drop-shadow-md relative backdrop-brightness-105">
+      {" "}
+      {/* Kind of see through glossy vibes but still a small contrast - allows the moving background to pass through */}
       <div
         className="flex flex-row items-center justify-between w-full relative"
         onMouseLeave={handleMouseLeave}
@@ -293,74 +296,81 @@ const Navigation = () => {
             alt="logo"
             width={200}
             height={100}
-            className="drop-shadow-[0_5px_3px_rgba(48,48,48,0.35)] hover:drop-shadow-[0_1px_3px_rgba(255,255,255,0.45)] transition-all duration-150 ease-in-out"
+            className="drop-shadow-[0_5px_3px_rgba(48,48,48,0.35)] hover:drop-shadow-[0_1px_3px_rgba(255,255,255,0.45)] transition-all duration-150 ease-in-out z-10" // Drop shadow makes the low-res logo pop a bit more. Looks more premium imo.
           />
         </Link>
         <ul className="flex flex-row gap-5">
-          {links.map((link, index) => (
-            <li
-              key={index}
-              className="relative"
-              onMouseEnter={() => handleMouseEnter(index)}
-            >
-              <Link
-                className="text-sm font-bold opacity-70 hover:text-[#797B7F] hover:duration-100 hover:ease-in"
-                href={link.src}
+          {links.map(
+            (
+              link,
+              index // Loops through the links array of objects to generate the nav bar instead of hardcoding everything in. Might end up in same amount of code lines but more organized this way.
+            ) => (
+              <li
+                key={index}
+                className="relative"
+                onMouseEnter={() => handleMouseEnter(index)}
               >
-                <div className="flex flex-row items-center gap-1 relative">
-                  {link.name}{" "}
-                  {link.submenu && (
-                    <SlArrowUp
-                      size={10}
-                      className={`transition-transform duration-300 ease-in-out ${
-                        hoveredIndex === index ? "rotate-180" : ""
-                      }`}
-                    />
-                  )}
-                </div>
-              </Link>
-              {hoveredIndex === index && link.submenu && (
-                <ul className=" flex flex-col absolute left-0 top-full mt-2 p-2 shadow-lg rounded-md bg-white backdrop-blur-3xl bg-opacity-80">
-                  {link.submenu.map((sublink, subindex) => (
-                    <li
-                      key={subindex}
-                      className="relative w-44"
-                      onMouseEnter={() => handleSubMouseEnter(subindex)}
-                    >
-                      <Link
-                        className="flex flex-row items-center px-4 py-2 gap-1 hover:bg-gray-200 hover:bg-opacity-50 hover:rounded-md text-sm"
-                        href={sublink.src}
+                <Link
+                  className="text-sm font-bold opacity-70 hover:text-[#797B7F] hover:duration-100 hover:ease-in z-10"
+                  href={link.src}
+                >
+                  <div className="flex flex-row items-center gap-1 relative">
+                    {link.name} {/* Displays arrow if theres a submenu */}
+                    {link.submenu && (
+                      <SlArrowUp
+                        size={10}
+                        className={`transition-transform duration-300 ease-in-out ${
+                          hoveredIndex === index ? "rotate-180" : "" // Arrow to the bottom to indicate menu list items appearing below
+                        }`}
+                      />
+                    )}
+                  </div>
+                </Link>
+                {hoveredIndex === index && link.submenu && (
+                  <ul className=" flex flex-col absolute left-0 top-full mt-2 p-2 shadow-lg rounded-md bg-white backdrop-blur-3xl z-10">
+                    {link.submenu.map((sublink, subindex) => (
+                      <li
+                        key={subindex}
+                        className="relative w-44"
+                        onMouseEnter={() => handleSubMouseEnter(subindex)}
                       >
-                        {sublink.subname}
-                        {sublink.subsubmenu && (
-                          <SlArrowUp
-                            size={10}
-                            className={`ml-2 transition-transform duration-300 ease-in-out ${
-                              subHoveredIndex === subindex ? "rotate-90" : ""
-                            }`}
-                          />
+                        <Link
+                          className="flex flex-row items-center px-4 py-2 gap-1 hover:bg-gray-200 hover:bg-opacity-50 hover:rounded-md text-sm"
+                          href={sublink.src}
+                        >
+                          {sublink.subname}
+                          {sublink.subsubmenu && (
+                            <SlArrowUp
+                              size={10}
+                              className={`ml-2 transition-transform duration-300 ease-in-out ${
+                                subHoveredIndex === subindex ? "rotate-90" : "" // Arrow to the right instead of bottom to indicate correct submenu appearing
+                              }`}
+                            />
+                          )}
+                        </Link>
+                        {subHoveredIndex === subindex && sublink.subsubmenu && (
+                          <ul className="absolute left-full top-0 mt-2 p-2 rounded-md shadow-lg bg-white">
+                            {sublink.subsubmenu.map(
+                              (subsublink, subsuindex) => (
+                                <li key={subsuindex}>
+                                  <Link
+                                    className="w-44 block px-4 py-2 text-sm hover:bg-gray-200 hover:bg-opacity-50 hover:rounded-md"
+                                    href={subsublink.src}
+                                  >
+                                    {subsublink.subsubname}
+                                  </Link>
+                                </li>
+                              )
+                            )}
+                          </ul>
                         )}
-                      </Link>
-                      {subHoveredIndex === subindex && sublink.subsubmenu && (
-                        <ul className="absolute left-full top-0 mt-2 p-2 rounded-md shadow-lg bg-white">
-                          {sublink.subsubmenu.map((subsublink, subsuindex) => (
-                            <li key={subsuindex}>
-                              <Link
-                                className="w-44 block px-4 py-2 text-sm hover:bg-gray-200 hover:bg-opacity-50 hover:rounded-md"
-                                href={subsublink.src}
-                              >
-                                {subsublink.subsubname}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
-          ))}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            )
+          )}
         </ul>
         <span className="bg-[#FDC917] p-2 rounded-md cursor-pointer text-sm text-black hover:opacity-60 opacity-85 font-bold duration-200 ease-in-out">
           <p>Hafa samband</p>

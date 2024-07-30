@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <HeroContainer />
-        <div className="flex flex-col min-h-screen w-[1200px] relative">
+        <div className="flex flex-col min-h-screen w-[1200px] relative gap-4">
           <Navigation />
           {children}
           <Footer />
