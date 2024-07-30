@@ -2,7 +2,7 @@ import React from "react";
 
 const MainSection = () => {
   return (
-    <div className="flex flex-col gap-4 bg-[linear-gradient(to_right,rgba(255,255,255,0.9),rgba(200,81,100,0)),url('../public/images/grafa.jpg')] p-6 rounded-xl drop-shadow-md bg-bottom z-0">
+    <div className="flex flex-col gap-4 bg-[linear-gradient(to_right,rgba(255,255,255,0.9),rgba(200,81,100,0)),url('../public/images/grafa.jpg')] p-6 rounded-xl drop-shadow-md bg-bottom -z-10">
       <div className="flex flex-col tracking-tighter gap-4 text-7xl font-bold">
         {" "}
         {/* bg-gradient-to-tr from-amber-300 to-black */}
