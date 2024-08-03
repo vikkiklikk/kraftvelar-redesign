@@ -1,12 +1,13 @@
 import Distribution from "@/components/Distribution";
 import MainSection from "@/components/MainSection";
-import Image from "next/image";
+import Umbod from "@/components/Umbod";
 
 export default function Home() {
   return (
     <main className="flex flex-col">
       <MainSection />
       <Distribution />
+      <Umbod />
     </main>
   );
 }
