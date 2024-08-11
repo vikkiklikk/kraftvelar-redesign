@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
         <HeroContainer />
-        <div className="flex flex-col min-h-screen w-[1200px] relative gap-4">
+        <div className="flex flex-col w-[1200px] relative gap-4">
           <Navigation />
           {children}
           <Footer />
